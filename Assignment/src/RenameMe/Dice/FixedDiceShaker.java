@@ -2,6 +2,7 @@ package RenameMe.Dice;
 
 import RenameMe.DiceShaker;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class FixedDiceShaker  implements DiceShaker {
         private final int[] shakes;

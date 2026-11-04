@@ -1,5 +1,9 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import RenameMe.Dice.RandomSingleDiceShaker;
+import RenameMe.DiceShaker;
+
+import java.util.Iterator;
 import java.util.Random;
 
 public class Main {
@@ -9,7 +13,6 @@ public class Main {
         int cols = 6;
         int boardSize = rows * cols;
         int numPlayers = 2;
-        int numDice = 1;
         String rulesUsed = "bouncing end, Hit and Wormhole";
 
 
@@ -19,9 +22,11 @@ public class Main {
         System.out.println("Board Size: "+ boardSize + " squares");
         System.out.println("Number of Players: " + numPlayers);
         System.out.println("Game Rules: " + rulesUsed);
-        System.out.println("Number of Dice: " + numDice);
         System.out.println("########################################\n");
 
+
+        DiceShaker diceShaker = new RandomSingleDiceShaker();
+        Iterator<Integer> diceIterator = diceShaker.iterator();
 
         int[][] board = new int[rows][cols];
         int squareNum = 1;
@@ -49,15 +54,12 @@ public class Main {
             int playerDisplayNum = currentPlayer + 1;
             int posBefore = playerPositions[currentPlayer];
 
-
-            int roll = random.nextInt(6) + 1;
+            int roll = diceIterator.next();
 
             int posAfter = posBefore + roll;
             if (posAfter > boardSize) {
                 posAfter = boardSize;
             }
-
-
 
             // if wormhole
             if (posAfter == 10) {
@@ -75,7 +77,6 @@ public class Main {
                     System.out.println("Hit a player! Player (number here) was hit and sent back to square 1!");
                 }
             }
-
 
             playerPositions[currentPlayer] = posAfter;
             playerTurns[currentPlayer]++;
